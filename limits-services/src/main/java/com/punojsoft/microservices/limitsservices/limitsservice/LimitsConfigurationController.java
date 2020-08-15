@@ -1,13 +1,17 @@
 package com.punojsoft.microservices.limitsservices.limitsservice;
 
 import com.punojsoft.microservices.limitsservices.limitsservice.bean.LimitsConfiguration;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class LimitsConfigurationController {
-    @GetMapping("/limis")
+    @Autowired
+    private Configuration configuration;
+
+    @GetMapping("/limits")
     public LimitsConfiguration retrieveLimitsFromConfiguration() {
-        return new LimitsConfiguration(1, 1000);
+        return new LimitsConfiguration(configuration.getMinimum(), configuration.getMaximum());
     }
 }
