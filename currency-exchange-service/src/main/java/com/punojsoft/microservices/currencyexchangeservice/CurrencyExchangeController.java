@@ -16,12 +16,8 @@ public class CurrencyExchangeController {
 
     @GetMapping("currency-exchange/from/{from}/to/{to}")
     public ExchangeValue retrieveExchangeValue(@PathVariable String from, @PathVariable String to) {
-        System.out.println("From " + from);
-        System.out.println("To " + to);
-
         ExchangeValue exchangeValue = exchangeRepository.findByFromAndTo(from.toUpperCase(), to.toUpperCase());
-        //        exchangeValue.setPort(Integer.parseInt(environment.getProperty("server.port")));
-        System.out.println(exchangeValue.getConversionMultiple());
+        exchangeValue.setPort(Integer.parseInt(environment.getProperty("local.server.port")));
         return exchangeValue;
     }
 }
