@@ -1,11 +1,13 @@
 package com.punojsoft.microservices.currencyexchangeservice;
 
+import brave.sampler.Sampler;
 import com.punojsoft.microservices.currencyexchangeservice.repository.ExchangeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
+import org.springframework.context.annotation.Bean;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -19,6 +21,11 @@ public class CurrencyExchangeServiceApplication implements CommandLineRunner {
 
     public static void main(String[] args) {
         SpringApplication.run(CurrencyExchangeServiceApplication.class, args);
+    }
+
+    @Bean
+    public Sampler defaultSampler() {
+        return Sampler.ALWAYS_SAMPLE;
     }
 
     @Override
